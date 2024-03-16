@@ -20,14 +20,14 @@ public class Ppal {
         Mesa mesa1 = new Mesa(1, 4);
         Mesa mesa2 = new Mesa(2, 6);
         Mesa mesa3 = new Mesa(3, 2);
-
+        
         Reserva reserva = new Reserva("Juan", 4, LocalDate.now(), LocalTime.now());
         
         reserva.agregarMesa(mesa1);
         reserva.agregarMesa(mesa2);
         reserva.agregarMesa(mesa3);
         
-        reserva.ocuparMesa(mesa1);        
+        reserva.ocuparMesa(mesa1);
         reserva.reservarMesa(reserva, mesa2);
         reserva.reservarMesa(reserva, mesa1);
     }

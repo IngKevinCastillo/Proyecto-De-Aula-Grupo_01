@@ -1,64 +1,93 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Proyecto;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Fabian Hinojosa
  */
-public class Mesa {
-    private int numeroMesa;
-    private int numeroDeAsientos;
-    private boolean estado;
-    private ArrayList<Reserva> reserva;
+public class Reserva {
+    private String nombre;
+    private int cantidadDeClientes;
+    private LocalDate fechaDeReservacion;
+    private LocalTime horaDeReservacion;
+    private ArrayList<Mesa> numeroMesa;
 
-    public Mesa() {
-        this.reserva = new ArrayList<>();
+    public Reserva() {
+        this.numeroMesa = new ArrayList<>();
     }
 
-    public Mesa(int numeroMesa, int numeroDeAsientos) {
+    public Reserva(String nombre, int cantidadDeClientes, LocalDate fechaDeReservacion, LocalTime horaDeReservacion) {
         this();
-        this.numeroMesa = numeroMesa;
-        this.numeroDeAsientos = numeroDeAsientos;
+        this.nombre = nombre;
+        this.cantidadDeClientes = cantidadDeClientes;
+        this.fechaDeReservacion = fechaDeReservacion;
+        this.horaDeReservacion = horaDeReservacion;
     }
 
-    public int getNumero() {
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCantidadDeClientes() {
+        return cantidadDeClientes;
+    }
+
+    public void setCantidadDeClientes(int cantidadDeClientes) {
+        this.cantidadDeClientes = cantidadDeClientes;
+    }
+
+    public LocalDate getFechaDeReservacion() {
+        return fechaDeReservacion;
+    }
+
+    public void setFechaDeReservacion(LocalDate fechaDeReservacion) {
+        this.fechaDeReservacion = fechaDeReservacion;
+    }
+
+    public LocalTime getHoraDeReservacion() {
+        return horaDeReservacion;
+    }
+
+    public void setHoraDeReservacion(LocalTime horaDeReservacion) {
+        this.horaDeReservacion = horaDeReservacion;
+    }
+
+    public ArrayList<Mesa> getMesa() {
         return numeroMesa;
     }
 
-    public void setNumeroMesa(int numeroMesa) {
+    public void setMesa(ArrayList<Mesa> numeroMesa) {
         this.numeroMesa = numeroMesa;
     }
-
-    public int getNumeroDeAsientos() {
-        return numeroDeAsientos;
+    
+    public void agregarMesa(Mesa mesa) {
+        numeroMesa.add(mesa);
     }
 
-    public void setNumeroDeAsientos(int numeroDeAsientos) {
-        this.numeroDeAsientos = numeroDeAsientos;
+    public void ocuparMesa(Mesa mesa) {
+        if (mesa.definirEstado()) {
+            JOptionPane.showMessageDialog(null, "La mesa " + mesa.getNumero() + " está ocupada.");
+        } else {
+            mesa.setEstado(true);
+            JOptionPane.showMessageDialog(null, "La mesa " + mesa.getNumero() + " ha sido ocupada.");
+        }
     }
-
-    public boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    public ArrayList<Reserva> getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(ArrayList<Reserva> reserva) {
-        this.reserva = reserva;
-    }
-
-    public boolean definirEstado() {
-        return estado;
+    
+    public void reservarMesa(Reserva reserva, Mesa mesa) {
+        if (!mesa.definirEstado()) {
+            JOptionPane.showMessageDialog(null, "La mesa " + mesa.getNumero() + " está ocupada, no se puede reservar.");
+        } else {
+            mesa.setEstado(false);
+            reserva.agregarMesa(mesa);
+            JOptionPane.showMessageDialog(null, "Mesa " + mesa.getNumero() + " reservada para " + reserva.getNombre());
+        }
     }
 }
