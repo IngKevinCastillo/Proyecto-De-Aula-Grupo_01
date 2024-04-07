@@ -15,14 +15,9 @@ public class Mesa {
     private int numeroMesa;
     private int numeroDeAsientos;
     private boolean estado;
-    private ArrayList<Reserva> reserva;
-
-    public Mesa() {
-        this.reserva = new ArrayList<>();
-    }
+    private Reserva reserva;
 
     public Mesa(int numeroMesa, int numeroDeAsientos) {
-        this();
         this.numeroMesa = numeroMesa;
         this.numeroDeAsientos = numeroDeAsientos;
     }
@@ -51,11 +46,11 @@ public class Mesa {
         this.estado = estado;
     }
 
-    public ArrayList<Reserva> getReserva() {
+    public Reserva getReserva() {
         return reserva;
     }
 
-    public void setReserva(ArrayList<Reserva> reserva) {
+    public void setReserva(Reserva reserva) {
         this.reserva = reserva;
     }
 
